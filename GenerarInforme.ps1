@@ -161,7 +161,7 @@ footer { margin-top: 8mm; color: #68778a; font-size: 8pt; }
 <section class="page">
 <h2>4. Resultados de rendimiento</h2>
 <p>Equipo: $(Encode-Html $procesador); memoria física: $memoriaGb GB. Motor: $(Encode-Html $versionSql). Configuración: Release; lecturas desde bases locales en el mismo equipo.</p>
-<div class="callout">Se repitió la batería porque la primera ronda tuvo tiempos atípicos: ADO.NET registró 66,343 ms para 1,000 productos y 9,573 ms para 10,000; en la segunda ronda fueron 5.82 ms y 22.24 ms. La tabla muestra la segunda ronda y la diferencia refleja variabilidad entre ejecuciones; interpreta las mediciones con cautela.</div>
+<div class="callout">La primera ronda tuvo tiempos atípicos: ADO.NET registró 66,343 ms para 1,000 productos y 9,573 ms para 10,000. En la segunda fueron 5.82 ms y 22.24 ms; la tercera ronda, que corresponde a esta tabla y a la captura, registró 6.73 ms y 18.63 ms. La variación entre rondas aconseja interpretar los tiempos con cautela.</div>
 <table><thead><tr><th>Escenario</th><th>ADO.NET ms</th><th>EF Core variante 1 ms</th><th>EF Core variante 2 ms</th></tr></thead><tbody>
 $resultRows
 </tbody></table>
@@ -184,15 +184,16 @@ $metricRows
 <p>La opción 5 intentó registrar una venta superior al stock y confirmó que no cambiaron las ventas, los detalles ni el inventario, tanto con ADO.NET como con EF Core.</p>
 <p>El estudiante reporta 68 horas de trabajo acumuladas en tres días; el tercer día aún no había terminado. El tiempo corresponde al proyecto completo y no se atribuye artificialmente a cada tecnología.</p>
 <ol><li>Dos intentos iniciales del benchmark completo terminaron por timeout SQL. Se optimizó la consulta y se elevó el CommandTimeout a 180 segundos; luego los siete escenarios finalizaron.</li>
-<li>La primera ronda mostró latencias de lectura atípicas (66,343 ms para 1,000 productos y 9,573 ms para 10,000). Se repitió el benchmark y se reportan los resultados de la segunda ronda.</li></ol>
+<li>La primera ronda mostró latencias de lectura atípicas (66,343 ms para 1,000 productos y 9,573 ms para 10,000). Se repitió la batería y la tercera ronda aparece en la tabla de este informe.</li>
+<li>Una ejecución del programa Database First agotó el tiempo de espera al consultar productos. La captura se conserva como evidencia del incidente; repite esa ejecución y agrega una captura exitosa antes de entregar.</li></ol>
 <p>Son incidentes de medición observados, no errores inventados de compilación. La compilación Release final reportó 0 errores y 0 advertencias.</p>
 </section>
 
 <section class="page">
 <h2>6. Análisis y conclusión</h2>
-<p>En la segunda ejecución, ADO.NET fue más rápido en las lecturas de 1,000 y 10,000 productos (5.82 frente a 11.68 ms con AsNoTracking; 22.24 frente a 24.30 ms), mientras que para 50,000 productos EF Core con AsNoTracking quedó ligeramente por delante (105.50 frente a 116.48 ms). EF con seguimiento fue más lento en esas lecturas, sobre todo al cargar 10,000 o más entidades. Para búsquedas repetidas por ID, ADO.NET tomó 206.61 ms frente a 572.65 ms en EF Core; en las búsquedas filtradas las dos opciones tardaron varios segundos y ADO.NET resultó apenas más rápido.</p>
-<p>ADO.NET también fue más rápido al insertar 1,000 productos (550.12 frente a 1,172.33 ms). En cambio, el ajuste masivo con ExecuteUpdate fue el más veloz (15.88 ms), comparado con 96.46 ms en ADO.NET y 446.64 ms cargando y guardando entidades. El reporte agregado tardó casi lo mismo en ambos enfoques, y EF Core fue más rápido en la prueba de 100 ventas (286.89 frente a 336.08 ms). El repositorio ADO.NET contiene 293 líneas frente a 163 en EF Core; el ORM reduce código repetitivo, aunque eso no implica que gane en todos los tiempos.</p>
-<p>La conclusión es que no hay un ganador universal: el resultado depende de la operación, del seguimiento de entidades, del SQL generado y del entorno. Además, la primera ronda tuvo tiempos de lectura extraordinariamente altos (66,343 ms para 1,000 filas y 9,573 ms para 10,000), frente a 5.82 y 22.24 ms en la segunda ronda. Esta variación limita la precisión de comparar una sola ejecución; se deben repetir las pruebas bajo condiciones controladas antes de generalizar.</p>
+<p>En la tercera ejecución, EF Core con AsNoTracking fue más rápido al leer 1,000 productos (2.30 ms frente a 6.73 ms de ADO.NET) y 50,000 productos (87.05 frente a 101.83 ms). Para 10,000 productos ADO.NET fue algo más rápido (18.63 frente a 20.33 ms). EF con seguimiento tomó 8.00, 53.23 y 146.80 ms, respectivamente. Las 1,000 búsquedas por ID quedaron prácticamente empatadas: 226.83 ms en ADO.NET y 226.40 ms en EF Core. En los filtros, ADO.NET tardó menos (8,454.17 frente a 9,910.50 ms), aunque ambas alternativas tardaron varios segundos.</p>
+<p>EF Core insertó 1,000 productos en 978.13 ms frente a 1,410.73 ms de ADO.NET. Para el ajuste de precios, ExecuteUpdate tardó 91.51 ms; ADO.NET, 108.09 ms; y EF cargando entidades, 483.87 ms. ADO.NET fue más rápido en el reporte por categoría (43.38 frente a 68.81 ms) y en 100 ventas (440.11 frente a 624.09 ms). El repositorio ADO.NET contiene 293 líneas frente a 163 en EF Core, por lo que el ORM requiere menos código en esta implementación.</p>
+<p>La conclusión es que no hay un ganador universal: el resultado depende de la operación, el seguimiento de entidades, el SQL generado y el entorno. Las lecturas de las primeras rondas tuvieron latencias muy distintas de las posteriores, lo que limita las conclusiones de una sola medición. Conviene repetir las pruebas en condiciones controladas antes de generalizar. En este proyecto EF Core destaca con AsNoTracking y menor cantidad de código; ADO.NET fue más rápido en filtros, reporte y ventas en esta ronda.</p>
 <h3>Recomendación para TechStore</h3>
 <p>Recomiendo EF Core como opción principal para el CRUD y las consultas de negocio por su menor cantidad de código, mapeo y mantenimiento más directo. Para lecturas masivas usaría AsNoTracking; para actualizaciones masivas, ExecuteUpdate, que fue la variante más rápida en esta medición. Mantendría ADO.NET para operaciones de alta frecuencia o consultas que requieran control explícito del SQL, pero solo cuando benchmarks repetidos demuestren una ventaja relevante. La elección final debe considerar también mantenibilidad, transacciones y requisitos del equipo, no solo estos tiempos locales.</p>
 <h3>Enfoque Model First</h3>
@@ -209,7 +210,7 @@ $metricRows
 </ul>
 <h3>Material de la asignatura</h3>
 <p>Práctica TechStore: Evaluación comparativa entre ADO.NET y Entity Framework Core. Guía ADO.NET vs. Entity Framework.</p>
-<div class="callout">Para la entrega, agrega las capturas de la migración, el scaffolding Database First, el Rollback verificado y la tabla de resultados. Revisa las instrucciones de la práctica y explica el código durante la demostración.</div>
+<div class="callout">Las capturas proporcionadas se encuentran en la carpeta Capturas. Una muestra un timeout del programa Database First; reemplázala por una ejecución exitosa antes de la entrega. Revisa las instrucciones de la práctica y explica el código durante la demostración.</div>
 <footer>Resultados recogidos localmente. Repite el benchmark si cambias el volumen, el equipo o la configuración.</footer>
 </section>
 </body>

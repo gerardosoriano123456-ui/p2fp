@@ -81,17 +81,17 @@ footer { margin-top: 8mm; color: #68778a; font-size: 8pt; }
 <section class="page">
 <h2>4. Resultados de rendimiento</h2>
 <p>Equipo: 13th Gen Intel(R) Core(TM) i7-13650HX; memoria física: 15.7 GB. Motor: Microsoft SQL Server 2025 (RTM) - 17.0.1000.7 (X64). Configuración: Release; lecturas desde bases locales en el mismo equipo.</p>
-<div class="callout">Se repitió la batería porque la primera ronda tuvo tiempos atípicos: ADO.NET registró 66,343 ms para 1,000 productos y 9,573 ms para 10,000; en la segunda ronda fueron 5.82 ms y 22.24 ms. La tabla muestra la segunda ronda y la diferencia refleja variabilidad entre ejecuciones; interpreta las mediciones con cautela.</div>
+<div class="callout">La primera ronda tuvo tiempos atípicos: ADO.NET registró 66,343 ms para 1,000 productos y 9,573 ms para 10,000. En la segunda fueron 5.82 ms y 22.24 ms; la tercera ronda, que corresponde a esta tabla y a la captura, registró 6.73 ms y 18.63 ms. La variación entre rondas aconseja interpretar los tiempos con cautela.</div>
 <table><thead><tr><th>Escenario</th><th>ADO.NET ms</th><th>EF Core variante 1 ms</th><th>EF Core variante 2 ms</th></tr></thead><tbody>
-<tr><td>1. Leer 1,000</td><td>5.82</td><td>18.91</td><td>11.68</td></tr>
-<tr><td>1. Leer 10,000</td><td>22.24</td><td>80.05</td><td>24.30</td></tr>
-<tr><td>1. Leer 50,000</td><td>116.48</td><td>169.42</td><td>105.50</td></tr>
-<tr><td>2. Buscar por Id (1,000)</td><td>206.61</td><td>572.65</td><td></td></tr>
-<tr><td>3. Filtros (100)</td><td>7084.41</td><td>8087.72</td><td></td></tr>
-<tr><td>4. Insertar 1,000</td><td>550.12</td><td>1172.33</td><td></td></tr>
-<tr><td>5. Ajuste (ADO / entidades)</td><td>96.46</td><td>446.64</td><td>15.88</td></tr>
-<tr><td>6. Reporte por categor&#237;a</td><td>35.46</td><td>34.50</td><td></td></tr>
-<tr><td>7. Ventas (100 x 3 productos)</td><td>336.08</td><td>286.89</td><td></td></tr>
+<tr><td>1. Leer 1,000</td><td>6.73</td><td>8.00</td><td>2.30</td></tr>
+<tr><td>1. Leer 10,000</td><td>18.63</td><td>53.23</td><td>20.33</td></tr>
+<tr><td>1. Leer 50,000</td><td>101.83</td><td>146.80</td><td>87.05</td></tr>
+<tr><td>2. Buscar por Id (1,000)</td><td>226.83</td><td>226.40</td><td></td></tr>
+<tr><td>3. Filtros (100)</td><td>8454.17</td><td>9910.50</td><td></td></tr>
+<tr><td>4. Insertar 1,000</td><td>1410.73</td><td>978.13</td><td></td></tr>
+<tr><td>5. Ajuste (ADO / entidades)</td><td>108.09</td><td>483.87</td><td>91.51</td></tr>
+<tr><td>6. Reporte por categor&#237;a</td><td>43.38</td><td>68.81</td><td></td></tr>
+<tr><td>7. Ventas (100 x 3 productos)</td><td>440.11</td><td>624.09</td><td></td></tr>
 </tbody></table>
 <p class="muted">En lectura, las variantes de EF son con seguimiento y AsNoTracking. En el ajuste, son entidades y ExecuteUpdate. Los escenarios que no tienen dos variantes EF dejan esa celda vacía.</p>
 <h3>Gráfico comparativo</h3>
@@ -101,57 +101,57 @@ footer { margin-top: 8mm; color: #68778a; font-size: 8pt; }
 <svg viewBox="0 0 800 551" role="img" aria-label="Barras de milisegundos por escenario">
 <text x='4' y='37' font-size='10'>1. Leer 1,000</text>
 <rect x='165' y='42' width='1' height='9' fill='#2563eb' />
-<text x='172' y='50' font-size='9'>5.82 ms</text>
+<text x='172' y='50' font-size='9'>6.73 ms</text>
 <rect x='165' y='53' width='1' height='9' fill='#16a34a' />
-<text x='172' y='61' font-size='9'>18.91 ms</text>
+<text x='172' y='61' font-size='9'>8 ms</text>
 <rect x='165' y='64' width='1' height='9' fill='#f97316' />
-<text x='172' y='72' font-size='9'>11.68 ms</text>
+<text x='172' y='72' font-size='9'>2.3 ms</text>
 <text x='4' y='95' font-size='10'>1. Leer 10,000</text>
-<rect x='165' y='100' width='2' height='9' fill='#2563eb' />
-<text x='173' y='108' font-size='9'>22.24 ms</text>
-<rect x='165' y='111' width='6' height='9' fill='#16a34a' />
-<text x='177' y='119' font-size='9'>80.05 ms</text>
-<rect x='165' y='122' width='2' height='9' fill='#f97316' />
-<text x='173' y='130' font-size='9'>24.3 ms</text>
+<rect x='165' y='100' width='1' height='9' fill='#2563eb' />
+<text x='172' y='108' font-size='9'>18.63 ms</text>
+<rect x='165' y='111' width='3' height='9' fill='#16a34a' />
+<text x='174' y='119' font-size='9'>53.23 ms</text>
+<rect x='165' y='122' width='1' height='9' fill='#f97316' />
+<text x='172' y='130' font-size='9'>20.33 ms</text>
 <text x='4' y='153' font-size='10'>1. Leer 50,000</text>
-<rect x='165' y='158' width='8' height='9' fill='#2563eb' />
-<text x='179' y='166' font-size='9'>116.48 ms</text>
-<rect x='165' y='169' width='12' height='9' fill='#16a34a' />
-<text x='183' y='177' font-size='9'>169.42 ms</text>
-<rect x='165' y='180' width='7' height='9' fill='#f97316' />
-<text x='178' y='188' font-size='9'>105.5 ms</text>
+<rect x='165' y='158' width='6' height='9' fill='#2563eb' />
+<text x='177' y='166' font-size='9'>101.83 ms</text>
+<rect x='165' y='169' width='8' height='9' fill='#16a34a' />
+<text x='179' y='177' font-size='9'>146.8 ms</text>
+<rect x='165' y='180' width='5' height='9' fill='#f97316' />
+<text x='176' y='188' font-size='9'>87.05 ms</text>
 <text x='4' y='211' font-size='10'>2. Buscar por Id (1,000)</text>
-<rect x='165' y='216' width='14' height='9' fill='#2563eb' />
-<text x='185' y='224' font-size='9'>206.61 ms</text>
-<rect x='165' y='227' width='40' height='9' fill='#16a34a' />
-<text x='211' y='235' font-size='9'>572.65 ms</text>
+<rect x='165' y='216' width='13' height='9' fill='#2563eb' />
+<text x='184' y='224' font-size='9'>226.83 ms</text>
+<rect x='165' y='227' width='13' height='9' fill='#16a34a' />
+<text x='184' y='235' font-size='9'>226.4 ms</text>
 <text x='4' y='269' font-size='10'>3. Filtros (100)</text>
-<rect x='165' y='274' width='490' height='9' fill='#2563eb' />
-<text x='661' y='282' font-size='9'>7084.41 ms</text>
+<rect x='165' y='274' width='478' height='9' fill='#2563eb' />
+<text x='649' y='282' font-size='9'>8454.17 ms</text>
 <rect x='165' y='285' width='560' height='9' fill='#16a34a' />
-<text x='731' y='293' font-size='9'>8087.72 ms</text>
+<text x='731' y='293' font-size='9'>9910.5 ms</text>
 <text x='4' y='327' font-size='10'>4. Insertar 1,000</text>
-<rect x='165' y='332' width='38' height='9' fill='#2563eb' />
-<text x='209' y='340' font-size='9'>550.12 ms</text>
-<rect x='165' y='343' width='81' height='9' fill='#16a34a' />
-<text x='252' y='351' font-size='9'>1172.33 ms</text>
+<rect x='165' y='332' width='80' height='9' fill='#2563eb' />
+<text x='251' y='340' font-size='9'>1410.73 ms</text>
+<rect x='165' y='343' width='55' height='9' fill='#16a34a' />
+<text x='226' y='351' font-size='9'>978.13 ms</text>
 <text x='4' y='385' font-size='10'>5. Ajuste (ADO / entidades)</text>
-<rect x='165' y='390' width='7' height='9' fill='#2563eb' />
-<text x='178' y='398' font-size='9'>96.46 ms</text>
-<rect x='165' y='401' width='31' height='9' fill='#16a34a' />
-<text x='202' y='409' font-size='9'>446.64 ms</text>
-<rect x='165' y='412' width='1' height='9' fill='#f97316' />
-<text x='172' y='420' font-size='9'>15.88 ms</text>
+<rect x='165' y='390' width='6' height='9' fill='#2563eb' />
+<text x='177' y='398' font-size='9'>108.09 ms</text>
+<rect x='165' y='401' width='27' height='9' fill='#16a34a' />
+<text x='198' y='409' font-size='9'>483.87 ms</text>
+<rect x='165' y='412' width='5' height='9' fill='#f97316' />
+<text x='176' y='420' font-size='9'>91.51 ms</text>
 <text x='4' y='443' font-size='10'>6. Reporte por categor&#237;a</text>
 <rect x='165' y='448' width='2' height='9' fill='#2563eb' />
-<text x='173' y='456' font-size='9'>35.46 ms</text>
-<rect x='165' y='459' width='2' height='9' fill='#16a34a' />
-<text x='173' y='467' font-size='9'>34.5 ms</text>
+<text x='173' y='456' font-size='9'>43.38 ms</text>
+<rect x='165' y='459' width='4' height='9' fill='#16a34a' />
+<text x='175' y='467' font-size='9'>68.81 ms</text>
 <text x='4' y='501' font-size='10'>7. Ventas (100 x 3 productos)</text>
-<rect x='165' y='506' width='23' height='9' fill='#2563eb' />
-<text x='194' y='514' font-size='9'>336.08 ms</text>
-<rect x='165' y='517' width='20' height='9' fill='#16a34a' />
-<text x='191' y='525' font-size='9'>286.89 ms</text>
+<rect x='165' y='506' width='25' height='9' fill='#2563eb' />
+<text x='196' y='514' font-size='9'>440.11 ms</text>
+<rect x='165' y='517' width='35' height='9' fill='#16a34a' />
+<text x='206' y='525' font-size='9'>624.09 ms</text>
 
 </svg>
 </section>
@@ -170,15 +170,16 @@ footer { margin-top: 8mm; color: #68778a; font-size: 8pt; }
 <p>La opción 5 intentó registrar una venta superior al stock y confirmó que no cambiaron las ventas, los detalles ni el inventario, tanto con ADO.NET como con EF Core.</p>
 <p>El estudiante reporta 68 horas de trabajo acumuladas en tres días; el tercer día aún no había terminado. El tiempo corresponde al proyecto completo y no se atribuye artificialmente a cada tecnología.</p>
 <ol><li>Dos intentos iniciales del benchmark completo terminaron por timeout SQL. Se optimizó la consulta y se elevó el CommandTimeout a 180 segundos; luego los siete escenarios finalizaron.</li>
-<li>La primera ronda mostró latencias de lectura atípicas (66,343 ms para 1,000 productos y 9,573 ms para 10,000). Se repitió el benchmark y se reportan los resultados de la segunda ronda.</li></ol>
+<li>La primera ronda mostró latencias de lectura atípicas (66,343 ms para 1,000 productos y 9,573 ms para 10,000). Se repitió la batería y la tercera ronda aparece en la tabla de este informe.</li>
+<li>Una ejecución del programa Database First agotó el tiempo de espera al consultar productos. La captura se conserva como evidencia del incidente; repite esa ejecución y agrega una captura exitosa antes de entregar.</li></ol>
 <p>Son incidentes de medición observados, no errores inventados de compilación. La compilación Release final reportó 0 errores y 0 advertencias.</p>
 </section>
 
 <section class="page">
 <h2>6. Análisis y conclusión</h2>
-<p>En la segunda ejecución, ADO.NET fue más rápido en las lecturas de 1,000 y 10,000 productos (5.82 frente a 11.68 ms con AsNoTracking; 22.24 frente a 24.30 ms), mientras que para 50,000 productos EF Core con AsNoTracking quedó ligeramente por delante (105.50 frente a 116.48 ms). EF con seguimiento fue más lento en esas lecturas, sobre todo al cargar 10,000 o más entidades. Para búsquedas repetidas por ID, ADO.NET tomó 206.61 ms frente a 572.65 ms en EF Core; en las búsquedas filtradas las dos opciones tardaron varios segundos y ADO.NET resultó apenas más rápido.</p>
-<p>ADO.NET también fue más rápido al insertar 1,000 productos (550.12 frente a 1,172.33 ms). En cambio, el ajuste masivo con ExecuteUpdate fue el más veloz (15.88 ms), comparado con 96.46 ms en ADO.NET y 446.64 ms cargando y guardando entidades. El reporte agregado tardó casi lo mismo en ambos enfoques, y EF Core fue más rápido en la prueba de 100 ventas (286.89 frente a 336.08 ms). El repositorio ADO.NET contiene 293 líneas frente a 163 en EF Core; el ORM reduce código repetitivo, aunque eso no implica que gane en todos los tiempos.</p>
-<p>La conclusión es que no hay un ganador universal: el resultado depende de la operación, del seguimiento de entidades, del SQL generado y del entorno. Además, la primera ronda tuvo tiempos de lectura extraordinariamente altos (66,343 ms para 1,000 filas y 9,573 ms para 10,000), frente a 5.82 y 22.24 ms en la segunda ronda. Esta variación limita la precisión de comparar una sola ejecución; se deben repetir las pruebas bajo condiciones controladas antes de generalizar.</p>
+<p>En la tercera ejecución, EF Core con AsNoTracking fue más rápido al leer 1,000 productos (2.30 ms frente a 6.73 ms de ADO.NET) y 50,000 productos (87.05 frente a 101.83 ms). Para 10,000 productos ADO.NET fue algo más rápido (18.63 frente a 20.33 ms). EF con seguimiento tomó 8.00, 53.23 y 146.80 ms, respectivamente. Las 1,000 búsquedas por ID quedaron prácticamente empatadas: 226.83 ms en ADO.NET y 226.40 ms en EF Core. En los filtros, ADO.NET tardó menos (8,454.17 frente a 9,910.50 ms), aunque ambas alternativas tardaron varios segundos.</p>
+<p>EF Core insertó 1,000 productos en 978.13 ms frente a 1,410.73 ms de ADO.NET. Para el ajuste de precios, ExecuteUpdate tardó 91.51 ms; ADO.NET, 108.09 ms; y EF cargando entidades, 483.87 ms. ADO.NET fue más rápido en el reporte por categoría (43.38 frente a 68.81 ms) y en 100 ventas (440.11 frente a 624.09 ms). El repositorio ADO.NET contiene 293 líneas frente a 163 en EF Core, por lo que el ORM requiere menos código en esta implementación.</p>
+<p>La conclusión es que no hay un ganador universal: el resultado depende de la operación, el seguimiento de entidades, el SQL generado y el entorno. Las lecturas de las primeras rondas tuvieron latencias muy distintas de las posteriores, lo que limita las conclusiones de una sola medición. Conviene repetir las pruebas en condiciones controladas antes de generalizar. En este proyecto EF Core destaca con AsNoTracking y menor cantidad de código; ADO.NET fue más rápido en filtros, reporte y ventas en esta ronda.</p>
 <h3>Recomendación para TechStore</h3>
 <p>Recomiendo EF Core como opción principal para el CRUD y las consultas de negocio por su menor cantidad de código, mapeo y mantenimiento más directo. Para lecturas masivas usaría AsNoTracking; para actualizaciones masivas, ExecuteUpdate, que fue la variante más rápida en esta medición. Mantendría ADO.NET para operaciones de alta frecuencia o consultas que requieran control explícito del SQL, pero solo cuando benchmarks repetidos demuestren una ventaja relevante. La elección final debe considerar también mantenibilidad, transacciones y requisitos del equipo, no solo estos tiempos locales.</p>
 <h3>Enfoque Model First</h3>
@@ -195,7 +196,7 @@ footer { margin-top: 8mm; color: #68778a; font-size: 8pt; }
 </ul>
 <h3>Material de la asignatura</h3>
 <p>Práctica TechStore: Evaluación comparativa entre ADO.NET y Entity Framework Core. Guía ADO.NET vs. Entity Framework.</p>
-<div class="callout">Para la entrega, agrega las capturas de la migración, el scaffolding Database First, el Rollback verificado y la tabla de resultados. Revisa las instrucciones de la práctica y explica el código durante la demostración.</div>
+<div class="callout">Las capturas proporcionadas se encuentran en la carpeta Capturas. Una muestra un timeout del programa Database First; reemplázala por una ejecución exitosa antes de la entrega. Revisa las instrucciones de la práctica y explica el código durante la demostración.</div>
 <footer>Resultados recogidos localmente. Repite el benchmark si cambias el volumen, el equipo o la configuración.</footer>
 </section>
 </body>

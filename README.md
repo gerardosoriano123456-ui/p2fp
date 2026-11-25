@@ -62,6 +62,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\GenerarInforme.ps1
 
 El informe usa los datos del estudiante ya configurados, los resultados medidos y una gráfica. Revisa las capturas requeridas y confirma que las métricas personales reflejen tu experiencia antes de entregar.
 
+## Capturas de ejecución
+
+Las evidencias proporcionadas están en `Capturas/`: migración aplicada, scaffolding Database First, rollback, benchmarks y una ejecución Database First que terminó por timeout. Esta última documenta un fallo, no una prueba exitosa; repite Database First y agrega la captura del resultado correcto antes de entregar.
+
 ## Proyectos
 
 - `TechStore.Dominio`: modelos y contratos comunes.
