@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TechStore | Panel de prueba</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="#">▦ <span>TechStore</span></a><span class="tag">Panel de prueba</span></header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">GESTIÓN DE INVENTARIO</p><h1>Explora tu tienda</h1><p>Consulta productos y prueba una venta con ADO.NET o Entity Framework Core.</p></div><div id="status" class="status">Conectando...</div></section>
+    <section class="toolbar card"><div class="search"><label for="search">Buscar producto</label><input id="search" placeholder="Nombre del producto"></div><div><label for="category">Categoría</label><select id="category"><option value="">Todas las categorías</option></select></div><div><label for="provider">Implementación</label><select id="provider"><option value="ef">Entity Framework Core</option><option value="ado">ADO.NET</option></select></div><button id="refresh" class="button">Buscar</button></section>
+    <section class="summary"><div class="card stat"><span>Productos mostrados</span><strong id="count">—</strong></div><div class="card stat"><span>Proveedor activo</span><strong id="active-provider">EF Core</strong></div><div class="card hint"><span class="hint-icon">i</span><span>Sin filtros se muestran los primeros 100 productos.</span></div></section>
+    <section class="card inventory"><div class="section-heading"><div><h2>Inventario</h2><p>Selecciona un producto para completar una venta.</p></div><span id="result-label" class="muted"></span></div><div class="table-wrap"><table><thead><tr><th>Producto</th><th>Código</th><th>Marca</th><th>Categoría</th><th>Precio</th><th>Stock</th><th></th></tr></thead><tbody id="products"><tr><td colspan="7" class="empty">Cargando productos…</td></tr></tbody></table></div></section>
+    <section class="card sale"><div><p class="eyebrow">PRUEBA RÁPIDA</p><h2>Registrar una venta</h2><p class="muted">La venta se procesa solo con el proveedor seleccionado.</p></div><form id="sale-form"><label>Id. cliente<input name="cliente" type="number" min="1" value="1" required></label><label>Id. producto<input name="producto" id="sale-product" type="number" min="1" required placeholder="Elige de la lista"></label><label>Cantidad<input name="cantidad" type="number" min="1" value="1" required></label><button class="button primary">Registrar venta</button></form><div id="message" class="message" role="status"></div></section>
+    <section class="review" id="revision"><div class="section-heading review-heading"><div><p class="eyebrow">ENTREGA ACADÉMICA</p><h2>Revisión de la práctica</h2><p>Consulta los componentes y archivos principales de la comparación.</p></div><button id="reload-review" class="button">Actualizar revisión</button></div><div class="review-grid"><article class="card review-card"><span class="review-number">01</span><h3>Base de datos</h3><p>Script de esquema y carga de datos de prueba.</p><div id="db-files" class="file-list"></div></article><article class="card review-card"><span class="review-number">02</span><h3>Repositorios</h3><p>ADO.NET, EF Core Code First y modelo Database First.</p><div class="file-list"><span class="available">●</span> TechStore.Datos.Ado<br><span class="available">●</span> TechStore.Datos.Ef<br><span class="available">●</span> TechStore.DatabaseFirst</div></article><article class="card review-card"><span class="review-number">03</span><h3>Medición e informe</h3><p>Revisa los resultados medidos y los archivos de entrega.</p><div id="report-files" class="file-list"></div></article></div><div class="card benchmarks"><div class="section-heading"><div><h3>Resultados de rendimiento</h3><p>Se cargan desde ResultadosRendimiento.csv. Ejecuta la opción 4 de la consola para generarlos o actualizarlos.</p></div></div><div class="table-wrap"><table><thead><tr><th>Escenario</th><th>ADO.NET (ms)</th><th>EF Core 1 (ms)</th><th>EF Core 2 (ms)</th></tr></thead><tbody id="benchmarks"><tr><td colspan="4" class="empty">Cargando resultados…</td></tr></tbody></table></div></div></section>
+  </main>
+  <footer>TechStore · Acceso a datos con ADO.NET y EF Core</footer>
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TechStore.Dominio\TechStore.Dominio.csproj" />
+    <ProjectReference Include="..\TechStore.Datos.Ado\TechStore.Datos.Ado.csproj" />
+    <ProjectReference Include="..\TechStore.Datos.Ef\TechStore.Datos.Ef.csproj" />
+  </ItemGroup>
+</Project>

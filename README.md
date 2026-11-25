@@ -93,3 +93,19 @@ dotnet ef dbcontext scaffold "Server=.;Database=TechStoreDB;Trusted_Connection=T
 - Confirma que la entrega esté publicada en el repositorio de GitHub indicado por la asignatura.
 
 El informe y los datos de medición deben poder explicarse durante la demostración. La guía general pide describir Model First con EF6 y explicar que EF Core no incluye ese diseñador `.edmx`; no es requisito desarrollar ese bonus de EF6.
+
+## Panel web para probar la tienda
+
+Se agregó una interfaz web sencilla en `TechStore.Web` que reutiliza los repositorios actuales. Con las bases de datos preparadas, ejecútala desde la carpeta raíz:
+
+```powershell
+dotnet run --project .\src\TechStore.Web
+```
+
+Abre la dirección local que muestre la consola (normalmente `http://localhost:5000`). El panel permite consultar productos con ADO.NET o EF Core, filtrar por nombre y categoría, y registrar una venta de prueba indicando el Id. de cliente. Las ventas se guardan únicamente en la base de datos del proveedor seleccionado. ADO.NET usa `TechStoreDB` y EF Core usa `TechStoreDB_EF`, igual que la aplicación de consola.
+
+### Iniciar con F5 en Visual Studio
+
+Abre `TechStore.sln`, en el Explorador de soluciones haz clic derecho en `TechStore.Web` y selecciona **Establecer como proyecto de inicio**. Luego presiona **F5**: Visual Studio abrirá el panel en `http://localhost:5080`. La sección “Revisión de la práctica” muestra los archivos disponibles y el CSV de rendimiento más reciente. Para generar o actualizar las mediciones, ejecuta la opción 4 de la consola y vuelve a pulsar “Actualizar revisión” en el panel.
+
+En VS Code, selecciona la configuración **TechStore Web (F5)** en Run and Debug y presiona **F5**. VS Code compila el proyecto web y abre el navegador cuando el servidor esté listo.
