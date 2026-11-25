@@ -1,0 +1,5 @@
+﻿"Metrica","ADO_NET","EF_Core","Notas"
+"Lineas de codigo de los repositorios (sin comentarios ni lineas vacias)","293","163","ADO.NET: 2 archivos; EF Core: 2 archivos"
+"Tiempo de desarrollo (horas)","No desglosado","No desglosado","68 horas totales declaradas por el estudiante; tercer día de trabajo aún en curso"
+"Errores encontrados al compilar o ejecutar","Sin errores en build Release final","Sin errores en build Release final","1) Dos intentos iniciales del benchmark expiraron por timeout SQL; se optimizó la consulta y se configuró timeout de 180 s. 2) La primera ronda tuvo latencias atípicas y se repitió. Suite final completa; build: 0 errores, 0 advertencias."
+"Cambio de esquema Marca: archivos y lineas modificadas","Cambio reflejado en consultas y esquema SQL","Cambio reflejado en modelo y migración","Marca aparece en 10 archivos C# y 2 scripts SQL. No es posible contar líneas del diff sin una copia previa o historial Git."
